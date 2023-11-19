@@ -29,28 +29,31 @@ public class Inventory {
         return null;
     }
 
-    public Guitar search(Guitar searchGuitar) {
+    public List search(GuitarSpec searchSpec) {
+        List matchingGuitars = new LinkedList();
         for (Iterator i = guitars.iterator(); i.hasNext();) {
             Guitar guitar = (Guitar) i.next();
             //일련번호, 가격 유일값이므로 무시
+            GuitarSpec guitarSpec = guitar.getGuitarSpec();
 
-            if (searchGuitar.getBuilder() != guitar.getBuilder()) {
+            if (searchSpec.getBuilder() != guitarSpec.getBuilder()) {
                 continue;
             }
-            String model = searchGuitar.getModel().toLowerCase();
-            if ((model != null) && (!model.equals(""))&&(!model.equals(guitar.getModel().toLowerCase()))) {
+            String model = searchSpec.getModel().toLowerCase();
+            if ((model != null) && (!model.equals(""))&&(!model.equals(searchSpec.getModel().toLowerCase()))) {
                 continue;
             }
-            if (searchGuitar.getType() != guitar.getType()) {
+            if (searchSpec.getType() != guitarSpec.getType()) {
                 continue;
             }
-            if (searchGuitar.getBackWood() != guitar.getBackWood()) {
+            if (searchSpec.getBackwood() != guitarSpec.getBackwood()) {
                 continue;
             }
-            if (searchGuitar.getTopWood() != guitar.getTopWood()) {
+            if (searchSpec.getTopwood() != guitarSpec.getTopwood()) {
                 continue;
             }
-            return guitar;
+            matchingGuitars.add(guitar);
+            return matchingGuitars;
         }
         return null;
     }

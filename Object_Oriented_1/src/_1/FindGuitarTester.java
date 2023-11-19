@@ -1,5 +1,8 @@
 package _1;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class FindGuitarTester {
 
     public static void main(String[] args) {
@@ -8,13 +11,19 @@ public class FindGuitarTester {
 
 
 //        Guitar whatErinLikes = new Guitar("", 0, "fender", "Stratocastor", "electric", "Alder", "Alder");
-        Guitar whatErinLikes = new Guitar("", 0, Builder.FENDER, "Stratocasotor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
-        Guitar guitar = inventory.search(whatErinLikes);
+//        Guitar whatErinLikes = new Guitar("", 0, Builder.FENDER, "Stratocasotor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
+        GuitarSpec whatErinLikes = new GuitarSpec(Builder.FENDER, "Stracastor", Type.ELECTRIC, Wood.ALDER, Wood.ALDER);
 
-        if (guitar != null) {
-            System.out.println("we got some");
+        List matchingGuitars = inventory.search(whatErinLikes);
+
+        if (!matchingGuitars.isEmpty()) {
+
+            for (Iterator i = matchingGuitars.iterator();i.hasNext();) {
+                System.out.println("we got some");
+            }
         } else {
-            System.out.println("sorry we dont have wht u lookin for");
+            System.out.println("nah we dont");
+
         }
     }
 
